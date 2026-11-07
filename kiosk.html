@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crush's EAC Express - Delivery Kiosk</title>
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header id="kiosk-top">
+        <div class="header-container">
+            <div class="logo-area">
+                <img src="images/logo.png" alt="EAC Express Logo" class="header-logo">
+                <div class="brand-text">
+                    <h1>Crush's EAC Hydro-Express</h1>
+                    <p>Pacific Ocean's Premier High-Speed Turtle Transit Line!</p>
+                </div>
+            </div>
+            <nav class="top-right-nav">
+                <ul>
+                    <li><a href="index.html">Founder Profile</a></li>
+                    <li><a href="kiosk.html" class="active">Delivery Kiosk</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        <!-- Rates Breakdown Table Section -->
+        <section class="card info-card">
+            <h2>EAC Express Pricing Breakdown</h2>
+            <p>Our ocean current transport rates follow transparent formulas:</p>
+            
+            <table class="rates-table">
+                <thead>
+                    <tr>
+                        <th class="col-component">Component</th>
+                        <th class="col-rate">Rate / Fee</th>
+                        <th class="col-desc">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Base Rate</td>
+                        <td class="rate-cell">RM 10.00</td>
+                        <td>Standard parcel intake charge</td>
+                    </tr>
+                    <tr>
+                        <td>Weight Charge</td>
+                        <td class="rate-cell">RM 4.00 / kg</td>
+                        <td>Calculated per kilogram of weight</td>
+                    </tr>
+                    <tr>
+                        <td>Drop-Off Exits</td>
+                        <td class="rate-cell">RM 15.00 – RM 60.00</td>
+                        <td>Varies by distance (Reef, Trench, or Sydney)</td>
+                    </tr>
+                    <tr>
+                        <td>Speed Multipliers</td>
+                        <td class="rate-cell">1.0x – 1.8x</td>
+                        <td>Standard Drift (1.0x), EAC Surge (1.4x), Emergency Jet (1.8x)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Kiosk Form Section -->
+        <section class="card form-card">
+            <h2>Calculate Shipping Quote</h2>
+            <p class="form-subtext">* Required Fields</p>
+            
+            <form id="expressForm" onsubmit="return calculateFee()">
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label for="custName">Customer Name *</label>
+                            <input type="text" id="custName" placeholder="e.g. Marlin or Dory">
+                            <div id="nameError" class="error-msg"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="custEmail">Sea-Mail Address *</label>
+                            <input type="text" id="custEmail" placeholder="e.g. dory@justkeepswimming.com">
+                            <div id="emailError" class="error-msg"></div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="mt-4">
+                    <legend>Parcel & Routing Options</legend>
+
+                    <div class="form-group">
+                        <label for="destination">To Drop-Off Exit Ramp *</label>
+                        <select id="destination">
+                            <option value="">-- Select Destination Exit --</option>
+                            <option value="15">Great Barrier Reef Nursery (Shallow Zone - RM 15.00)</option>
+                            <option value="35">The Drop-Off / Bermuda Trench (Deep Water - RM 35.00)</option>
+                            <option value="60">42 Wallaby Way, Sydney Harbor (Dentist Bay - RM 60.00)</option>
+                        </select>
+                        <div id="destError" class="error-msg"></div>
+                    </div>
+
+                    <div class="form-row-4col">
+                        <div class="form-group">
+                            <label for="parcelLength">Length (cm)</label>
+                            <input type="number" id="parcelLength" placeholder="e.g. 30" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="parcelWidth">Width (cm)</label>
+                            <input type="number" id="parcelWidth" placeholder="e.g. 20" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="parcelHeight">Height (cm)</label>
+                            <input type="number" id="parcelHeight" placeholder="e.g. 15" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="cargoWeight">Weight (kg) *</label>
+                            <input type="number" id="cargoWeight" step="0.1" placeholder="e.g. 4.5">
+                            <div id="weightError" class="error-msg"></div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Radio Cards for Transit Speed Mode -->
+                    <div class="form-group">
+                        <label>Transit Speed Mode *</label>
+                        <div class="speed-cards-grid">
+                            <label class="speed-card">
+                                <input type="radio" name="speed" value="1.0" checked>
+                                <div class="card-content">
+                                    <img src="images/turtle-speed.png" alt="Chill Turtle Drift" class="speed-card-img">
+                                    <span class="speed-title">🐢 Chill Turtle Drift</span>
+                                    <span class="speed-rate">1.0x (Standard Speed)</span>
+                                </div>
+                            </label>
+
+                            <label class="speed-card">
+                                <input type="radio" name="speed" value="1.4">
+                                <div class="card-content">
+                                    <img src="images/current-speed.png" alt="EAC Super-Current" class="speed-card-img">
+                                    <span class="speed-title">🌊 EAC Super-Current</span>
+                                    <span class="speed-rate">1.4x (Express Surge)</span>
+                                </div>
+                            </label>
+
+                            <label class="speed-card">
+                                <input type="radio" name="speed" value="1.8">
+                                <div class="card-content">
+                                    <img src="images/shark-speed.png" alt="Bruce's Shark Escort" class="speed-card-img">
+                                    <span class="speed-title">🦈 Bruce's Shark Escort</span>
+                                    <span class="speed-rate">1.8x (Emergency Jet)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ocean Protection & Extras</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="insurance" value="8.00"> Squirt's Shell Insurance (+RM 8.00)</label>
+                            <label><input type="checkbox" id="shield" value="5.00"> Jellyfish Protection Wrap (+RM 5.00)</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-calc">📦 Swim & Calculate Rate</button>
+                    <button type="reset" class="btn-reset" onclick="resetFormResults()">🔄 Clear Form</button>
+                </div>
+            </form>
+
+            <div id="ticketOutput" class="result-box" style="display: none;"></div>
+        </section>
+    </main>
+
+    <!-- Page Footer -->
+    <footer>
+        <p>&copy; 2026 ICT600 Individual Assignment | Matric Ending: 48. All Rights Reserved.</p>
+    </footer>
+
+    <!-- External JavaScript File -->
+    <script src="js/script.js"></script>
+</body>
+</html>
